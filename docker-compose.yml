@@ -1,21 +1,20 @@
 version: '3'
 services:
- odoo:
-   image: odoo:16.0 #image of the odoo
-   env_file: .env #environment file(contains odoo environment)
-   depends_on:
-     - postgres
-   ports:
-     - "8000:8069" #port mapping
-   Volumes: #mapping directory
-     - data:/var/lib/odoo
-     - ./config:/etc/odoo 
-     - ./extra-addons:/mnt/extra-addons
- postgres: 
-   image: postgres:13 #postgres image
-   env_file: .env #environment file(contains postgres environment)
-   volumes:
-     - db:/var/lib/postgresql/data/pgdata
+  odoo:
+    image: odoo:16.0
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "127.0.0.1:8069:8069"
+    volumes:
+      - data:/var/lib/odoo
+  postgres:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata
+
 volumes:
- data:
- db:
+  data:
+  db:
